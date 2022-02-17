@@ -1,0 +1,35 @@
+server:
+  port: 8084
+
+spring:
+  datasource:
+    username: postgres
+    password: postgres
+    url: 'jdbc:postgresql://localhost:5432/postgres'
+    driverClassName: org.postgresql.Driver
+    hikari:
+      connectionTimeout: 20000
+      idle-timeout: 60000
+      maximum-pool-size: 50
+      minimum-idle: 10
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show_sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        query:
+          plan_cache_max_size: 1
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        use_sql_comments: false
+        show_sql: false
+        format_sql: true
+        default_schema: public
+        enable_lazy_load_no_trans: true
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/
+      database: demo
