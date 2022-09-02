@@ -1,4 +1,6 @@
 ## About
+
+---
 Simple web application to showcase interactions with two database engines:
 * Relational DB: PostgreSQL
 * NoSQL DB: MongoDB
@@ -21,6 +23,28 @@ Sample payload:
 }
 ```
 
+## Application Run Configurations
+
+At the minimum, following properties should be updated either in:
+* `application.yml` before building jar
+  ```yaml
+  spring:
+    datasource:
+      username: <UPDATE_THIS>
+      password: <UPDATE_THIS>
+      url: <UPDATE_THIS>
+    data:
+      mongodb:
+        uri: <UPDATE_THIS>
+  ```
+* Or as environment variables while running the jar
+  ```bash
+  java -jar -Dspring.datasource.username=<UPDATE_THIS> -Dspring.datasource.password=<UPDATE_THIS> -Dspring.datasource.url=<UPDATE_THIS> -Dspring.data.uri=<UPDATE_THIS> target/awsdemo-0.0.1-SNAPSHOT.jar 
+  ```
+* Or as environment variables while running the container
+  ```bash
+  podman run -e SPRING_DATASOURCE_URL=<UPDATE_THIS> -e SPRING_DATASOURCE_USERNAME=<UPDATE_THIS> -e SPRING_DATASOURCE_PASSWORD=<UPDATE_THIS> -e SPRING_DATA_URI=<UPDATE_THIS> --name awsdemo awsdemo:latest
+  ```
 
 ## Local Setup
 
@@ -36,17 +60,28 @@ Sample payload:
     ```bash
     docker run --name mongodb -d -p 27017:27017 --restart=always -v $HOME/docker/volumes/mongodb:/data/db mongo
   ```
+* [Podman](https://podman.io/getting-started/installation) / [Docker](https://docs.docker.com/engine/install/) / [Buildah](https://github.com/containers/buildah/blob/main/install.md) for container build and run
     
 Optionally, install pgadmin and mongodb compass for UI. 
 
 ### Build
+**Container builds can be done using any engine: docker / buildah / podman**
 ```bash
+# JAR
 mvn clean install -DskipTests
+
+# Container -> this command builds on local. Re-tag for publishing to repository
+podman build -t awsdemo:latest . 
 ```
 
 ### Run
+**Containers can be run using any engine: docker / podman / containerd**
 ```bash
+# JAR
 java -jar -Dspring.profiles.active=local target/awsdemo-0.0.1-SNAPSHOT.jar
+
+# Container
+podman run --name awsdemo awsdemo:latest
 ```
 
 ## AWS setup
