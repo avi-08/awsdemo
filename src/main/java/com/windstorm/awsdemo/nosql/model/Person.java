@@ -1,4 +1,4 @@
-package com.vmware.awsdemo.nosql.model;
+package com.windstorm.awsdemo.nosql.model;
 
 import lombok.Data;
 

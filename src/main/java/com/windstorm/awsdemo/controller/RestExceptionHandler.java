@@ -1,4 +1,4 @@
-package com.vmware.awsdemo.controller;
+package com.windstorm.awsdemo.controller;
 
 import java.io.IOException;
 

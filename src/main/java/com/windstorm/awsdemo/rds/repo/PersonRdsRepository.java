@@ -1,9 +1,9 @@
-package com.vmware.awsdemo.rds.repo;
+package com.windstorm.awsdemo.rds.repo;
 
 import java.util.List;
 import java.util.UUID;
 
-import com.vmware.awsdemo.rds.model.Person;
+import com.windstorm.awsdemo.rds.model.Person;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

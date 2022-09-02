@@ -1,6 +1,5 @@
-package com.vmware.awsdemo.rds.model;
+package com.windstorm.awsdemo.rds.model;
 
-import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -10,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.Data;

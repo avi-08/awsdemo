@@ -1,10 +1,9 @@
-package com.vmware.awsdemo.dto;
+package com.windstorm.awsdemo.dto;
 
 import java.io.Serializable;
 import java.util.UUID;
 
-import com.vmware.awsdemo.dto.AddressDto;
-import com.vmware.awsdemo.rds.model.Person;
+import com.windstorm.awsdemo.rds.model.Person;
 import lombok.Data;
 
 import org.springframework.data.annotation.ReadOnlyProperty;

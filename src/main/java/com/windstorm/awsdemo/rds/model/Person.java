@@ -1,4 +1,4 @@
-package com.vmware.awsdemo.rds.model;
+package com.windstorm.awsdemo.rds.model;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import lombok.Getter;

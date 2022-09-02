@@ -1,13 +1,11 @@
-package com.vmware.awsdemo.controller;
+package com.windstorm.awsdemo.controller;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import com.vmware.awsdemo.dto.PersonDto;
-import com.vmware.awsdemo.rds.model.Person;
-import com.vmware.awsdemo.rds.repo.AddressRdsRepository;
-import com.vmware.awsdemo.rds.repo.PersonRdsRepository;
+import com.windstorm.awsdemo.nosql.model.Person;
+import com.windstorm.awsdemo.nosql.repo.PersonNosqlRepository;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -16,15 +14,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController @RequestMapping("/api/rds/persons") @RequiredArgsConstructor public class PersonRdsController {
-   private final PersonRdsRepository personRepository;
-   private final AddressRdsRepository addressRepository;
+@RestController @RequestMapping("/api/nosql/persons") @RequiredArgsConstructor public class PersonNosqlController {
+   private final PersonNosqlRepository personRepository;
 
-   @GetMapping public List<Person> getAllPersons() {
-      System.out.println("Getting all persons");
+   @GetMapping public List<Person> getAllPersons(@RequestParam(required = false) String city,
+         @RequestParam(required = false) String country) {
+      if (null != city) {
+         return personRepository.findAllByAddressCity(city);
+      }
+      if (null != country) {
+         return personRepository.findAllByAddressCountryLike(country);
+      }
       return personRepository.findAll();
    }
 
@@ -33,10 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
    }
 
    @PostMapping @ResponseStatus(HttpStatus.CREATED) public Person create(
-         @RequestBody PersonDto personDto) {
-      var address = addressRepository.save(personDto.getAddress().toAddress());
-      var person = personDto.toPerson();
-      person.setAddress(address);
+         @RequestBody Person person) {
       return personRepository.save(person);
    }
 

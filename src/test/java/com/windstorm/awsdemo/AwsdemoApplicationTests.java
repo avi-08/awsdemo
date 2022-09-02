@@ -1,4 +1,4 @@
-package com.vmware.awsdemo;
+package com.windstorm.awsdemo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

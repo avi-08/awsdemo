@@ -39,28 +39,28 @@ At the minimum, following properties should be updated either in:
   ```
 * Or as environment variables while running the jar
   ```bash
-  java -jar -Dspring.datasource.username=<UPDATE_THIS> -Dspring.datasource.password=<UPDATE_THIS> -Dspring.datasource.url=<UPDATE_THIS> -Dspring.data.uri=<UPDATE_THIS> target/awsdemo-0.0.1-SNAPSHOT.jar 
+  java -jar -Dspring.datasource.username=<UPDATE_THIS> -Dspring.datasource.password=<UPDATE_THIS> -Dspring.datasource.url=<UPDATE_THIS> -Dspring.data.mongodb.uri=<UPDATE_THIS> target/awsdemo-0.0.1-SNAPSHOT.jar 
   ```
 * Or as environment variables while running the container
   ```bash
-  podman run -e SPRING_DATASOURCE_URL=<UPDATE_THIS> -e SPRING_DATASOURCE_USERNAME=<UPDATE_THIS> -e SPRING_DATASOURCE_PASSWORD=<UPDATE_THIS> -e SPRING_DATA_URI=<UPDATE_THIS> --name awsdemo awsdemo:latest
+  podman run -e SPRING_DATASOURCE_URL=<UPDATE_THIS> -e SPRING_DATASOURCE_USERNAME=<UPDATE_THIS> -e SPRING_DATASOURCE_PASSWORD=<UPDATE_THIS> -e SPRING_DATA_MONGODB_URI=<UPDATE_THIS> --name awsdemo awsdemo:latest
   ```
 
 ## Local Setup
 
 ### Prerequisites
+* [Podman](https://podman.io/getting-started/installation) / [Docker](https://docs.docker.com/engine/install/) / [Buildah](https://github.com/containers/buildah/blob/main/install.md) for container build and run
 * A postgresql instance
     ```bash
   docker run -d -p 5432:5432 --restart=always -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data --name postgres-13_3 -e POSTGRES_PASSWORD=postgres  -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres postgres:13.3
   docker exec postgres-13_3 psql --username "postgres" --dbname "postgres" << SQLCMDS
-  CREATE SCHEMA vmware ;
+  CREATE SCHEMA windstorm ;
   SQLCMDS
   ```
 * A mongodb instance
     ```bash
     docker run --name mongodb -d -p 27017:27017 --restart=always -v $HOME/docker/volumes/mongodb:/data/db mongo
   ```
-* [Podman](https://podman.io/getting-started/installation) / [Docker](https://docs.docker.com/engine/install/) / [Buildah](https://github.com/containers/buildah/blob/main/install.md) for container build and run
     
 Optionally, install pgadmin and mongodb compass for UI. 
 
