@@ -1,3 +1,5 @@
+![build workflow](https://github.com/avi-08/awsdemo/actions/workflows/maven.yml/badge.svg)
+
 ## About
 
 ---
